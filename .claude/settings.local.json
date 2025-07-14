@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del popup.html popup.js background.js)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}

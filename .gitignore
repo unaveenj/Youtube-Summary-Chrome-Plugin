@@ -1,0 +1,29 @@
+# Node modules (if you add any)
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts (if you add a build process)
+dist/
+build/
+
+# Environment files (don't commit API keys)
+.env
+.env.local
+
+# Chrome extension development
+*.pem
+*.crx
+
+# Logs
+*.log
