@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Naveen U",
   "homepage_url": "https://github.com/unaveenj/youtube-summarizer",
+  "privacy_policy": "https://unaveenj.github.io/youtube-summarizer/privacy-policy.html",
   "description": "One-click YouTube video summarization with ChatGPT",
   "permissions": [
     "activeTab",
