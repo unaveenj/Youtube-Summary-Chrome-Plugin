@@ -1,30 +1,27 @@
-# 📺 YouTube Video Summarizer Chrome Extension
+# 📺 YouTube AI Video Summarizer Chrome Extension
 
-> Transform any YouTube video into concise summaries with ChatGPT integration!
+> Generate AI-powered summaries directly on YouTube with beautiful glassmorphism UI!
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Coming%20Soon-brightgreen)](https://chrome.google.com/webstore)
 [![GitHub license](https://img.shields.io/github/license/unaveenj/Youtube-Summary-Chrome-Plugin)](https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/unaveenj/Youtube-Summary-Chrome-Plugin)](https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin/stargazers)
 
-A powerful Chrome extension that automatically extracts transcripts from YouTube videos and creates intelligent summaries using ChatGPT.
+An intelligent Chrome extension that extracts YouTube video transcripts and generates AI-powered summaries using OpenRouter's GPT-OSS-20B model, displayed in a beautiful glassmorphism UI directly below the video.
 
 ## ✨ Features
 
-- 🎯 **One-Click Summarization**: Simple button next to YouTube's like/share buttons
-- 🤖 **ChatGPT Integration**: Automatically opens ChatGPT with formatted summary prompts
-- 🔗 **Free API Support**: Uses Supadata.ai API for reliable transcript extraction (100 free requests)
-- 🔐 **Secure Storage**: Encrypted local storage for API keys and settings
-- 📱 **Responsive Design**: Works seamlessly on desktop and mobile
-- 🎨 **YouTube Theme Integration**: Matches YouTube's light/dark themes
-- 📊 **Usage Tracking**: Local statistics to track your summarization history
-- 🛠️ **Fallback Options**: Manual transcript input for videos without captions
+- 🎯 **One-Click AI Summarization**: Simple button next to YouTube's like/share buttons
+- 🤖 **Local AI Processing**: Generate summaries using OpenRouter's free GPT-OSS-20B model
+- ✨ **Glassmorphism UI**: Beautiful, modern interface with blur effects and animations
+- 🔄 **Auto-Transcript Extraction**: Directly extracts transcripts using Supadata API
+- 📱 **Fully Responsive**: Works seamlessly on desktop, tablet, and mobile
+- 🎨 **YouTube Theme Integration**: Matches YouTube's light/dark themes perfectly
+- 📋 **Copy & Share**: Easy copy to clipboard and sharing functionality
+- 🔒 **Privacy First**: All processing happens locally, no data collection
 
 ## 🚀 Quick Start
 
-### Option 1: Chrome Web Store (Recommended)
-- Install from [Chrome Web Store](https://chrome.google.com/webstore) (Coming Soon)
-
-### Option 2: Manual Installation
+### Installation
 1. **Download**: Clone or download this repository
    ```bash
    git clone https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin.git
@@ -36,131 +33,94 @@ A powerful Chrome extension that automatically extracts transcripts from YouTube
 
 ## 🎯 How to Use
 
-### First Time Setup
-1. **Get Free API Key**: 
-   - Go to [dash.supadata.ai](https://dash.supadata.ai)
-   - Sign up for free (100 requests, no credit card)
-   - Copy your API key
+### Simple 3-Step Setup
+1. **Get API Keys**: 
+   - [Supadata API](https://supadata.ai) - for transcript extraction
+   - [OpenRouter API](https://openrouter.ai) - for AI summarization (free tier available)
+2. **Configure Extension**: Click the extension icon and enter your API keys
+3. **You're Ready**: Go to any YouTube video and click "Summarize"!
 
-2. **Configure Extension**:
-   - Click the ⚙️ settings button next to any YouTube video
-   - Paste your API key and click "Save Key"
-   - Test the API to ensure it works
+### Generate Summaries
+1. **Watch Video**: Navigate to any YouTube video with captions/subtitles
+2. **Click Summarize**: Hit the "Summarize" button next to Like/Share buttons
+3. **View Summary**: AI-generated summary appears in a beautiful glassmorphism container below the video
+4. **Interact**: Copy, share, or collapse/expand the summary as needed
 
-### Daily Usage
-1. **Watch Video**: Go to any YouTube video
-2. **Click Summarize**: Hit the "Summarize" button next to Like/Share
-3. **Get Summary**: ChatGPT opens with an intelligent summary prompt
-4. **Review**: Read the key points, conclusions, and actionable insights!
-
-## File Structure
+## 📁 File Structure
 
 ```
-youtube-summarizer-extension/
+youtube-ai-summarizer/
 ├── manifest.json          # Extension configuration
-├── content.js            # YouTube page integration
-├── background.js         # ChatGPT communication
-├── popup.html           # Settings interface
-├── popup.js             # Settings functionality
-├── styles.css           # Sidebar styling
+├── content.js            # YouTube integration and AI summarization logic
+├── popup.html            # Extension settings popup
+├── popup.js              # Settings management and API testing
+├── styles.css           # Glassmorphism UI styling
 ├── icons/               # Extension icons
 └── README.md            # This file
 ```
 
-## How It Works
+## 🔧 How It Works
 
-1. **Video Detection**: The extension detects when you're watching a YouTube video
-2. **Transcript Extraction**: It extracts the video's transcript from YouTube's captions
-3. **ChatGPT Integration**: The transcript is sent to your open ChatGPT session
-4. **Summary Generation**: ChatGPT processes the transcript and generates a summary
-5. **Display**: The summary is displayed in a collapsible sidebar
+1. **Video Detection**: Extension detects YouTube video pages and injects summarize button
+2. **Transcript Extraction**: Uses Supadata API to extract video transcripts
+3. **AI Summarization**: Sends transcript to OpenRouter's GPT-OSS-20B model for analysis
+4. **UI Display**: Shows beautiful glassmorphism summary container below the video
+5. **User Interaction**: Provides copy, share, and collapse/expand functionality
 
-## Requirements
+## 📋 AI Summary Format
+
+The extension generates comprehensive summaries with the following structure:
+
+```
+## Main Topic/Theme
+Brief overview of what the video is primarily about
+
+## Key Points
+• Important point 1 discussed in the video
+• Important point 2 with relevant context
+• Important point 3 and its implications
+• Additional key insights
+
+## Important Insights
+Key takeaways and conclusions drawn from the content
+
+## Actionable Information
+Practical advice, recommendations, or steps mentioned in the video
+```
+
+The summary is displayed in a beautiful glassmorphism container with options to copy, share, or collapse/expand the content.
+
+## 🔧 Requirements
 
 - Chrome browser with Manifest V3 support
-- Active ChatGPT session (free or paid account)
+- [Supadata API key](https://supadata.ai) (for transcript extraction)
+- [OpenRouter API key](https://openrouter.ai) (free tier available for GPT-OSS-20B)
 - YouTube videos with available captions/transcripts
-
-## Settings
-
-Access settings by clicking the extension icon in the toolbar:
-
-- **Auto-summarize**: Automatically generate summaries for new videos
-- **Summary format**: Choose between bullet points, paragraph, or detailed format
-- **Max length**: Control summary length (300, 500, or 800 words)
-
-## Troubleshooting
-
-### Common Issues
-
-1. **"ChatGPT not found" error**: Make sure you have ChatGPT open in a Chrome tab and are logged in
-2. **"No transcript available" error**: The video doesn't have captions enabled
-3. **Sidebar not appearing**: Try refreshing the YouTube page or reloading the extension
-
-### Permissions
-
-The extension requires these permissions:
-- `activeTab`: Access the current YouTube tab
-- `storage`: Save summaries and preferences
-- `scripting`: Inject content scripts into YouTube pages
-
-## Privacy
-
-- No data is sent to external servers except ChatGPT
-- Summaries are stored locally in your browser
-- No personal information is collected or transmitted
-
-## Development
-
-To modify or contribute to this extension:
-
-1. Make your changes to the source files
-2. Reload the extension in `chrome://extensions/`
-3. Test on YouTube videos with captions
-4. Submit pull requests with improvements
-
-## Limitations
-
-- Requires videos with available transcripts/captions
-- Depends on ChatGPT being accessible and functional
-- May not work with age-restricted or private videos
-- Summary quality depends on transcript accuracy
-
-## License
-
-## 🏗️ Technical Details
-
-### Built With
-- **Manifest V3**: Latest Chrome extension standards
-- **Vanilla JavaScript**: No frameworks, lightweight and fast
-- **Supadata.ai API**: Reliable transcript extraction service
-- **Chrome Storage API**: Secure local data management
-
-### Architecture
-- **content.js**: Main extension logic and UI injection
-- **manifest.json**: Extension configuration and permissions
-- **styles.css**: YouTube-integrated styling
-- **Secure storage**: Encrypted API key management
+- Active internet connection for API access
 
 ## 🔒 Privacy & Security
 
-- ✅ **No data collection**: Zero personal information stored
-- ✅ **Local storage only**: API keys never leave your browser
-- ✅ **Encrypted storage**: Base64 encoding for API keys
-- ✅ **Open source**: Fully transparent codebase
-- ✅ **Minimal permissions**: Only YouTube and API access
+- ✅ **Secure API Integration**: Uses encrypted HTTPS connections to trusted services
+- ✅ **No data collection**: Zero personal information stored or transmitted
+- ✅ **Local storage only**: API keys stored securely in Chrome's local storage
+- ✅ **Open source**: Fully transparent codebase for security review
+- ✅ **Minimal permissions**: Only YouTube, Supadata, and OpenRouter access required
+- ✅ **No tracking**: No analytics, cookies, or user behavior tracking
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
-- **"No captions available"**: Video doesn't have transcripts - use manual method
-- **"API key invalid"**: Check your Supadata.ai key in settings
-- **Button not appearing**: Refresh YouTube page or reload extension
+- **"API key not configured"**: Configure your Supadata and OpenRouter API keys in extension settings
+- **"No transcript available"**: Video doesn't have captions/subtitles available
+- **Button not appearing**: Refresh the YouTube page or reload the extension
+- **Summary not generating**: Check your OpenRouter API key and internet connection
+- **Timeout errors**: Try again - the APIs might be temporarily overloaded
 
-### Getting Help
-- Check [Issues](https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin/issues)
-- Create a new issue with details
-- Include Chrome version and error messages
+### API Key Setup
+1. **Supadata API**: Visit [supadata.ai](https://supadata.ai) to get your API key
+2. **OpenRouter API**: Visit [openrouter.ai](https://openrouter.ai) to get your free API key
+3. **Extension Settings**: Click the extension icon and enter both API keys
+4. **Test Connection**: Use the "Test Connection" button to verify everything works
 
 ## 🤝 Contributing
 
@@ -192,4 +152,6 @@ Project Link: [https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin](https:
 
 ---
 
-**Made with ❤️ for productivity and learning**
+**Made with ❤️ for productivity and learning** 
+
+✨ **Featuring beautiful glassmorphism UI and free AI-powered summarization**

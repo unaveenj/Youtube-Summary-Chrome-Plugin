@@ -27,3 +27,6 @@ build/
 
 # Logs
 *.log
+
+# Presentation files
+Presentation1/
