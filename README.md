@@ -41,22 +41,24 @@ Transform your YouTube experience with AI-powered video summaries! Get instant i
 
 ## 🎯 Setup
 
-1. **Get API Keys**:
-   - [Supadata API](https://supadata.ai) - for transcript extraction
-   - [OpenRouter API](https://openrouter.ai) - for AI summarization (free)
-
-2. **One-Time Configuration**: Click the extension icon to open the setup panel
+### Quick One-Time Configuration
 
 <div align="center">
-  <img src="v2_config.png" alt="API Key Configuration Panel" width="400"/>
-  <p><em>Simple one-time setup with your API keys</em></p>
+  <img src="v2_config.png" alt="API Key Configuration Panel" width="500"/>
+  <p><em>Simple and intuitive setup interface for your API keys</em></p>
 </div>
 
-3. **Enter Your Keys**: Paste your API keys and click "Save Configuration"
+1. **Get Your Free API Keys**:
+   - [Supadata API](https://supadata.ai) - for transcript extraction
+   - [OpenRouter API](https://openrouter.ai) - for AI summarization (completely free)
 
-4. **Test Connection**: Use "Test Connection" to verify everything works
+2. **Configure Once**:
+   - Click the extension icon in your browser toolbar
+   - Enter your API keys in the clean configuration panel
+   - Click "Test Connection" to verify everything works
+   - Save your configuration - that's it!
 
-5. **Start Summarizing**: Go to any YouTube video and click "Summarize"!
+3. **Start Summarizing**: Go to any YouTube video and click "Summarize"!
 
 ## 🔧 How It Works
 
