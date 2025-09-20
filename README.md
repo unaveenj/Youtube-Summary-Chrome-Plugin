@@ -81,11 +81,3 @@ Transform your YouTube experience with AI-powered video summaries! Get instant i
 3. Commit changes (`git commit -m 'Add feature'`)
 4. Push to branch (`git push origin feature/name`)
 5. Open Pull Request
-
-## 📝 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
----
-
-**Made with ❤️ by [Naveen U](https://github.com/unaveenj)**
