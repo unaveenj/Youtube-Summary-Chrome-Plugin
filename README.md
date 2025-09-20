@@ -4,18 +4,29 @@
 [![GitHub license](https://img.shields.io/github/license/unaveenj/Youtube-Summary-Chrome-Plugin)](https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/unaveenj/Youtube-Summary-Chrome-Plugin)](https://github.com/unaveenj/Youtube-Summary-Chrome-Plugin/stargazers)
 
-Generate AI-powered summaries directly on YouTube with beautiful glassmorphism UI!
+Transform your YouTube experience with AI-powered video summaries! Get instant insights from any video with our beautiful, modern interface featuring glassmorphism design.
 
-![YouTube Summarizer v2](v2.png)
+<div align="center">
+  <img src="v2_ss.png" alt="YouTube AI Summarizer in action" width="800"/>
+  <p><em>See the extension in action with its sleek glassmorphism interface</em></p>
+</div>
 
 ## ✨ Features
 
-- 🎯 **One-Click Summarization** - Simple button next to like/share buttons
-- 🤖 **AI-Powered** - Uses OpenRouter's free GPT-OSS-20B model  
-- ✨ **Beautiful UI** - Glassmorphism design with blur effects
-- 🔄 **Auto-Transcript** - Extracts transcripts using Supadata API
-- 📱 **Responsive** - Works on desktop, tablet, and mobile
-- 🔒 **Privacy First** - All processing happens locally
+- 🎯 **One-Click Summarization** - Elegant "Summarize" button seamlessly integrated with YouTube's interface
+- 🤖 **AI-Powered Intelligence** - Uses OpenRouter's advanced models for comprehensive video analysis
+- ✨ **Stunning Glassmorphism UI** - Modern frosted glass design with smooth animations and blur effects
+- 📋 **Smart Summary Panel** - Organized content with main topics, key points, and structured insights
+- 🔄 **Auto-Transcript Extraction** - Automatically extracts and processes video transcripts
+- 📱 **Fully Responsive** - Perfect experience across desktop, tablet, and mobile devices
+- 🔒 **Privacy First** - All processing happens securely with no data collection
+
+## 🎬 How It Works
+
+1. **Navigate** to any YouTube video
+2. **Click** the "Summarize" button next to like/share
+3. **Watch** as the beautiful summary panel appears with organized insights
+4. **Enjoy** structured summaries with main topics and key takeaways
 
 ## 🚀 Installation
 
