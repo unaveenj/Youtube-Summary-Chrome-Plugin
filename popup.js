@@ -113,7 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const openrouterCurlCommand = `curl -X POST 'https://openrouter.ai/api/v1/chat/completions' \\
   -H 'Authorization: Bearer ${openrouterApiKey || 'YOUR_OPENROUTER_KEY'}' \\
   -H 'Content-Type: application/json' \\
-  -d '{"model": "openai/gpt-oss-20b:free", "messages": [{"role": "user", "content": "Test message"}]}'`;
+  -H 'HTTP-Referer: ${window.location.origin}' \\
+  -H 'X-Title: YouTube Summarizer' \\
+  -d '{"model": "xiaomi/mimo-v2-flash:free", "messages": [{"role": "user", "content": "Test message"}]}'`;
 
     const debugInfo = `🔧 DEBUG INFORMATION:
 
@@ -129,7 +131,7 @@ ${supadataCurlCommand}
 OPENROUTER API:
 Endpoint: https://openrouter.ai/api/v1/chat/completions
 Method: POST
-Model: openai/gpt-oss-20b:free
+Model: xiaomi/mimo-v2-flash:free (Xiaomi MiMo-V2-Flash - 309B total params, 256K context)
 Headers: Authorization: Bearer ${openrouterApiKey ? openrouterApiKey.substring(0, 12) + '...' : 'YOUR_KEY'}
 
 📋 OpenRouter CURL Command:
@@ -206,10 +208,12 @@ OpenRouter: {"choices": [{"message": {"content": "response..."}}]}`;
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'HTTP-Referer': window.location.origin,
+          'X-Title': 'YouTube Summarizer'
         },
         body: JSON.stringify({
-          model: 'openai/gpt-oss-20b:free',
+          model: 'xiaomi/mimo-v2-flash:free',
           messages: [{ role: 'user', content: 'Test connection' }],
           max_tokens: 10
         }),

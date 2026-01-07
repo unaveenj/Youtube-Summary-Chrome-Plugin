@@ -29,38 +29,29 @@ function getCurrentVideoId() {
 
 function injectSummarizeButton() {
   if (buttonInjected) return;
-  
-  // Wait for YouTube's action buttons to load
-  const actionsContainer = document.querySelector('#actions-inner, #menu-container #top-level-buttons-computed');
-  if (!actionsContainer) {
-    setTimeout(injectSummarizeButton, 1000);
+
+  // Check if button already exists
+  const existingButton = document.getElementById('yt-summarizer-floating-button');
+  if (existingButton) {
+    buttonInjected = true;
     return;
   }
-  
-  // Create container for button
+
+  // Create floating button container
   const buttonContainer = document.createElement('div');
-  buttonContainer.style.display = 'flex';
-  buttonContainer.style.gap = '8px';
-  buttonContainer.style.alignItems = 'center';
-  
-  // Create the summarize button
-  const summarizerButton = document.createElement('button');
-  summarizerButton.id = 'yt-summarizer-button';
-  summarizerButton.className = 'yt-summarizer-btn';
-  summarizerButton.innerHTML = `
-    <svg viewBox="0 0 24 24" width="24" height="24">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+  buttonContainer.id = 'yt-summarizer-floating-button';
+  buttonContainer.className = 'yt-summarizer-floating-btn';
+  buttonContainer.innerHTML = `
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
     </svg>
-    <span>Summarize</span>
+    <span class="yt-summarizer-btn-text">Summarize</span>
   `;
-  summarizerButton.title = 'Generate AI summary of this video';
-  summarizerButton.addEventListener('click', handleSummarizeClick);
-  
-  // Add button to container
-  buttonContainer.appendChild(summarizerButton);
-  
-  // Insert container into actions
-  actionsContainer.appendChild(buttonContainer);
+  buttonContainer.title = 'Generate AI summary of this video';
+  buttonContainer.addEventListener('click', handleSummarizeClick);
+
+  // Add to body
+  document.body.appendChild(buttonContainer);
   buttonInjected = true;
 }
 
@@ -140,9 +131,13 @@ async function extractTranscriptWithSupadata() {
           return;
         }
 
-        // Get video metadata
-        const videoTitle = document.querySelector('h1.ytd-video-primary-info-renderer yt-formatted-string')?.textContent || 'Unknown';
-        const channelName = document.querySelector('#channel-name a')?.textContent || 'Unknown';
+        // Get video metadata - updated selectors for 2026
+        const videoTitle = document.querySelector('h1.ytd-watch-metadata yt-formatted-string, h1 yt-formatted-string.ytd-watch-metadata, ytd-watch-metadata h1')?.textContent ||
+                          document.querySelector('h1.ytd-video-primary-info-renderer yt-formatted-string')?.textContent ||
+                          'Unknown';
+        const channelName = document.querySelector('ytd-channel-name yt-formatted-string a, ytd-channel-name #text a, #channel-name a')?.textContent ||
+                           document.querySelector('ytd-channel-name yt-formatted-string')?.textContent ||
+                           'Unknown';
         
         resolve({
           title: videoTitle,
@@ -220,13 +215,15 @@ Keep the summary comprehensive but well-organized and easy to read.`;
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${apiKey}`,
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'HTTP-Referer': window.location.origin,
+              'X-Title': 'YouTube Summarizer'
             },
             body: JSON.stringify({
-              model: 'openai/gpt-oss-20b:free',
-              messages: [{ 
-                role: 'user', 
-                content: prompt 
+              model: 'xiaomi/mimo-v2-flash:free',
+              messages: [{
+                role: 'user',
+                content: prompt
               }],
               max_tokens: 1000,
               temperature: 0.7
@@ -439,13 +436,13 @@ function displaySummary(summary, videoData) {
   contentDiv.innerHTML = `
     <div class="yt-summary-text">${formattedSummary}</div>
     <div class="yt-summary-actions">
-      <button class="yt-summary-action-btn" onclick="copySummaryToClipboard()">
+      <button class="yt-summary-action-btn" id="copy-summary-btn">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
           <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
         </svg>
         Copy
       </button>
-      <button class="yt-summary-action-btn" onclick="shareSummary()">
+      <button class="yt-summary-action-btn" id="share-summary-btn">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
           <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.50-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
         </svg>
@@ -455,10 +452,52 @@ function displaySummary(summary, videoData) {
   `;
 
   // Store the summary data for sharing/copying
-  window.ytSummaryData = {
+  const summaryData = {
     summary: summary,
     videoData: videoData
   };
+
+  // Add event listeners to buttons
+  const copyBtn = document.getElementById('copy-summary-btn');
+  const shareBtn = document.getElementById('share-summary-btn');
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = `${summaryData.videoData.title}\nby ${summaryData.videoData.channel}\n\n${summaryData.summary}`;
+
+      copyToClipboard(textToCopy).then(() => {
+        showNotification('📋 Summary copied to clipboard!', 'success');
+      }).catch(() => {
+        showNotification('❌ Failed to copy to clipboard', 'error');
+      });
+    });
+  }
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      const shareText = `Check out this AI summary of "${summaryData.videoData.title}" by ${summaryData.videoData.channel}:\n\n${summaryData.summary}\n\nWatch: ${summaryData.videoData.url}`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: `AI Summary: ${summaryData.videoData.title}`,
+          text: shareText,
+          url: summaryData.videoData.url,
+        }).catch(() => {
+          // Fallback to clipboard
+          copyToClipboard(shareText).then(() => {
+            showNotification('📋 Share text copied to clipboard!', 'success');
+          });
+        });
+      } else {
+        // Fallback to clipboard
+        copyToClipboard(shareText).then(() => {
+          showNotification('📋 Share text copied to clipboard!', 'success');
+        }).catch(() => {
+          showNotification('❌ Failed to copy share text', 'error');
+        });
+      }
+    });
+  }
 }
 
 function formatSummaryWithASCII(summary, videoData) {
@@ -578,12 +617,18 @@ function displayError(errorMessage) {
       </svg>
       <p><strong>Error:</strong> ${errorMessage}</p>
       <p style="font-size: 14px; margin-top: 16px;">
-        <button class="yt-summary-action-btn" onclick="retrySummary()" style="margin: 0 auto;">
+        <button class="yt-summary-action-btn" id="retry-summary-btn" style="margin: 0 auto;">
           Try Again
         </button>
       </p>
     </div>
   `;
+
+  // Add retry button event listener
+  const retryBtn = document.getElementById('retry-summary-btn');
+  if (retryBtn) {
+    retryBtn.addEventListener('click', handleSummarizeClick);
+  }
 }
 
 async function handleSummarizeClick() {
@@ -594,7 +639,7 @@ async function handleSummarizeClick() {
       return;
     }
 
-    const button = document.getElementById('yt-summarizer-button');
+    const button = document.getElementById('yt-summarizer-floating-button');
     const originalText = button.innerHTML;
     
     // Reset button function with delay
@@ -609,12 +654,13 @@ async function handleSummarizeClick() {
 
     // Show loading state
     button.innerHTML = `
-      <svg viewBox="0 0 24 24" width="24" height="24" class="spinning">
+      <svg viewBox="0 0 24 24" width="24" height="24" class="spinning" fill="white">
         <path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/>
       </svg>
-      <span>Processing...</span>
+      <span class="yt-summarizer-btn-text">Processing...</span>
     `;
     button.disabled = true;
+    button.style.opacity = '0.7';
 
     // Create the summary UI
     createSummaryUI();
@@ -673,64 +719,21 @@ async function handleSummarizeClick() {
     console.error('Unexpected error in handleSummarizeClick:', outerError);
     
     // Ensure button is reset
-    const button = document.getElementById('yt-summarizer-button');
+    const button = document.getElementById('yt-summarizer-floating-button');
     if (button) {
       button.disabled = false;
+      button.style.opacity = '1';
       button.innerHTML = `
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
         </svg>
-        <span>Summarize</span>
+        <span class="yt-summarizer-btn-text">Summarize</span>
       `;
     }
     
     showNotification('❌ Unexpected error occurred', 'error');
   }
 }
-
-// Global functions for UI interactions
-
-window.copySummaryToClipboard = function() {
-  if (!window.ytSummaryData) return;
-  
-  const textToCopy = `${window.ytSummaryData.videoData.title}\nby ${window.ytSummaryData.videoData.channel}\n\n${window.ytSummaryData.summary}`;
-  
-  copyToClipboard(textToCopy).then(() => {
-    showNotification('📋 Summary copied to clipboard!', 'success');
-  }).catch(() => {
-    showNotification('❌ Failed to copy to clipboard', 'error');
-  });
-};
-
-window.shareSummary = function() {
-  if (!window.ytSummaryData) return;
-  
-  const shareText = `Check out this AI summary of "${window.ytSummaryData.videoData.title}" by ${window.ytSummaryData.videoData.channel}:\n\n${window.ytSummaryData.summary}\n\nWatch: ${window.ytSummaryData.videoData.url}`;
-  
-  if (navigator.share) {
-    navigator.share({
-      title: `AI Summary: ${window.ytSummaryData.videoData.title}`,
-      text: shareText,
-      url: window.ytSummaryData.videoData.url,
-    }).catch(() => {
-      // Fallback to clipboard
-      copyToClipboard(shareText).then(() => {
-        showNotification('📋 Share text copied to clipboard!', 'success');
-      });
-    });
-  } else {
-    // Fallback to clipboard
-    copyToClipboard(shareText).then(() => {
-      showNotification('📋 Share text copied to clipboard!', 'success');
-    }).catch(() => {
-      showNotification('❌ Failed to copy share text', 'error');
-    });
-  }
-};
-
-window.retrySummary = function() {
-  handleSummarizeClick();
-};
 
 // Retry mechanism for API calls
 async function extractTranscriptWithRetry(maxRetries = 2) {
@@ -872,7 +875,7 @@ function handleVideoChange() {
     buttonInjected = false;
     
     // Remove old button if exists
-    const oldButton = document.getElementById('yt-summarizer-button');
+    const oldButton = document.getElementById('yt-summarizer-floating-button');
     if (oldButton) {
       oldButton.remove();
     }

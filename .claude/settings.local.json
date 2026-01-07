@@ -10,7 +10,10 @@
       "WebFetch(domain:supadata.ai)",
       "WebFetch(domain:chatgpt.com)",
       "WebFetch(domain:openrouter.ai)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(dir /b:*)",
+      "WebSearch",
+      "Bash(powershell -Command:*)"
     ],
     "deny": []
   }
