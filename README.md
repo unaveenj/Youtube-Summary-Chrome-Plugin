@@ -7,13 +7,13 @@
 Transform your YouTube experience with AI-powered video summaries! Get instant insights from any video with our beautiful, modern interface featuring glassmorphism design.
 
 <div align="center">
-  <img src="v2_ss.png" alt="YouTube AI Summarizer in action" width="800"/>
-  <p><em>See the extension in action with its sleek glassmorphism interface</em></p>
+  <img src="youtube-summarizer-v2.2.1.png" alt="YouTube AI Summarizer v2.2.1 with floating button" width="800"/>
+  <p><em>New v2.2.1: Beautiful floating purple button with 3D effects</em></p>
 </div>
 
 ## ✨ Features
 
-- 🎯 **One-Click Summarization** - Elegant "Summarize" button seamlessly integrated with YouTube's interface
+- 🎯 **One-Click Summarization** - Beautiful floating purple button with 3D effects and smooth animations
 - 🤖 **AI-Powered Intelligence** - Uses OpenRouter's advanced models for comprehensive video analysis
 - ✨ **Stunning Glassmorphism UI** - Modern frosted glass design with smooth animations and blur effects
 - 📋 **Smart Summary Panel** - Organized content with main topics, key points, and structured insights
@@ -24,7 +24,7 @@ Transform your YouTube experience with AI-powered video summaries! Get instant i
 ## 🎬 How It Works
 
 1. **Navigate** to any YouTube video
-2. **Click** the "Summarize" button next to like/share
+2. **Click** the floating purple "Summarize" button in the bottom-right corner
 3. **Watch** as the beautiful summary panel appears with organized insights
 4. **Enjoy** structured summaries with main topics and key takeaways
 
